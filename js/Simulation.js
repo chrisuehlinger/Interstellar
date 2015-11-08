@@ -17,6 +17,8 @@ var Simulation = {
     this.renderer.sortObjects = false;
 
     this.renderer.autoClear = false;
+      
+    this.effect = new THREE.StereoEffect(this.renderer);
 
     this.quadScene = new THREE.Scene();
     this.quadCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -89,6 +91,7 @@ var Simulation = {
     var onWindowResize = function()
     {
       self.renderer.setSize(window.innerWidth, window.innerHeight);
+      self.effect.setSize(window.innerWidth, window.innerHeight);
 
       self.updateView();
 
@@ -124,7 +127,7 @@ var Simulation = {
 
   initScene: function()
   {
-    this.wormholePositionSize = new THREE.Vector4(10, 0.0, -32, 0.8);
+    this.wormholePositionSize = new THREE.Vector4(10, 0.0, -32, 10);
     this.blackholePositionSize = new THREE.Vector4(0.0, -250.0, 250.0, 12.5);
     this.saturnPositionSize = new THREE.Vector4(-14, 5, -40, 8.0);
     this.planetPositionSize = new THREE.Vector4(7.6, 62, -50, 0.08);
@@ -329,5 +332,6 @@ var Simulation = {
 
     this.renderer.clear();
     this.composer.render();
+    this.effect.render(this.quadScene, this.quadCam);
   },
 };

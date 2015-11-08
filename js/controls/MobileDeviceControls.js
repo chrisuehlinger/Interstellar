@@ -20,14 +20,14 @@ function MobileDeviceControls(player, element)
       return;
     }
 
-    var avgX = 0, avgY = 0;
-    for (var i = 0; i < touches.length; i++)
-    {
-      avgX += touches[i].pageX;
-      avgY += touches[i].pageY;
-    }
-    avgX /= touches.length;
-    avgY /= touches.length;
+    var avgX = screen.height / 2, avgY = screen.width / 2;
+//    for (var i = 0; i < touches.length; i++)
+//    {
+//      avgX += touches[i].pageX;
+//      avgY += touches[i].pageY;
+//    }
+//    avgX /= touches.length;
+//    avgY /= touches.length;
 
     var vy = Math.tan(0.5 * self.fovy);
     var vx = window.innerWidth / window.innerHeight * vy;
@@ -38,7 +38,7 @@ function MobileDeviceControls(player, element)
       -1
     ).normalize();
 
-    self.velocity.multiplyScalar(touches.length > 1 ? 10 : 1);
+    self.velocity.multiplyScalar(touches.length > 1 ? 100 : 10);
   }
 
   this.connect = function() {
